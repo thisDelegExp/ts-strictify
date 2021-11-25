@@ -31,7 +31,7 @@ export const strictify = async (args: Args): Promise<StrictifyResult> => {
   const errorCount = changedFiles.reduce<number>((totalErrorCount, fileName) => {
     let errorCount = 0
     tscOut.map((line) => {
-      if (line.includes(relative(process.cwd(), fileName))) {
+      if (line.includes(relative(process.cwd(), fileName).split('\\').join('/'))) {
         errorCount === 0 ? onCheckFile(fileName, true) : null
         totalErrorCount++
         errorCount++
