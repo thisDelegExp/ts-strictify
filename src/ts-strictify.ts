@@ -15,6 +15,11 @@ export interface StrictifyResult {
   errors: number
 }
 
+const normalizePath = (text: string): string => {
+  const detectedBackslashes = /\\/g
+  return text.replace(detectedBackslashes, '/')
+}
+
 export const strictify = async (args: Args): Promise<StrictifyResult> => {
   const { onFoundChangedFiles, onCheckFile, typeScriptOptions, gitOptions } = args
 
@@ -31,7 +36,10 @@ export const strictify = async (args: Args): Promise<StrictifyResult> => {
   const errorCount = changedFiles.reduce<number>((totalErrorCount, fileName) => {
     let errorCount = 0
     tscOut.map((line) => {
-      if (line.includes(relative(process.cwd(), fileName).split('\\').join('/'))) {
+      const relativePathNormalized = normalizePath(relative(process.cwd(), fileName))
+      const lineNormalized = normalizePath(line)
+
+      if (lineNormalized.includes(relativePathNormalized)) {
         errorCount === 0 ? onCheckFile(fileName, true) : null
         totalErrorCount++
         errorCount++

@@ -1,6 +1,6 @@
 {
   "name": "ts-strictify",
-  "version": "1.6.1-mwstechnology",
+  "version": "1.6.2-mwstechnology",
   "description": "Enable gradual TypeScript strict",
   "keywords": [
     "typescript",
@@ -33,7 +33,7 @@
     "yargs": "^15.3.0"
   },
   "peerDependencies": {
-    "typescript": "3.x"
+    "typescript": "4.x"
   },
   "devDependencies": {
     "@babel/core": "7.9.0",
@@ -62,7 +62,7 @@
     "pretty-quick": "2.0.1",
     "semantic-release": "17.0.4",
     "tmp-promise": "2.0.2",
-    "typescript": "3.7.5"
+    "typescript": "~4.3.5"
   },
   "husky": {
     "hooks": {
